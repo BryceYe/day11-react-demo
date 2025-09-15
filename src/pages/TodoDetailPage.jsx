@@ -6,8 +6,9 @@ import "./css/TodoDetailPage.css"
 
 export function TodoDetailPage() {
     const {id} = useParams();
-    const {state, dispatch} = useContext(TodoContext)
-    const todo = state.filter((todo) => todo.id === parseInt(id))
+    const {state} = useContext(TodoContext)
+    console.log(state)
+    const todo = state.filter((todo) => todo.id === id)
     if (todo.length === 0) {
         return <div>Todo not found</div>
     }

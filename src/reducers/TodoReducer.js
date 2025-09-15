@@ -1,6 +1,8 @@
 export function todoReducer(state, action) {
     const id = action.payload.id
     switch (action.type) {
+        case "LOAD_TODOS":
+            return action.payload;
         case "TOGGLE_TODO":
             const newState = [...state]
             return newState.map((value) => {

@@ -17,7 +17,6 @@ export function TodoItemGenerator() {
                 });
                 setInput("");
             })
-        setInput("");
     }
 
     return (

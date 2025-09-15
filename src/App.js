@@ -3,12 +3,33 @@ import "./App.css"
 import {todoReducer} from "./reducers/TodoReducer";
 import {TodoContext} from "./contexts/TodoContext";
 import {MultipleTodo} from "./components/MultipleTodo";
-import {createBrowserRouter, RouterProvider} from "react-router";
+import {createBrowserRouter, NavLink, Outlet, RouterProvider} from "react-router";
+
+function DefaultLayout() {
+    return <div>
+            <header>
+                <nav>
+                    <ul>
+                        <li><NavLink to={"/"}>Home</NavLink></li>
+                    </ul>
+                </nav>
+            </header>
+            <main>
+                <Outlet/>
+            </main>
+        </div>
+}
 
 const routes = createBrowserRouter([
     {
         path:"/",
-        element:<MultipleTodo/>
+        element:<DefaultLayout/>,
+        children:[
+            {
+                path:"/",
+                element: <MultipleTodo />
+            }
+        ]
     }
 ])
 

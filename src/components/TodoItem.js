@@ -1,17 +1,12 @@
 import {useContext} from "react";
 
 import {TodoContext} from "../contexts/TodoContext";
-import {api} from "../api/MockApi";
+import {useTodoService} from "../useTodoService";
 
 export function TodoItem(props) {
     const {dispatch} = useContext(TodoContext)
 
-    const makeAsDoneTodo =  (props) =>  {
-        return api.put(`/todos/${props.todo.id}`, {
-            ...props.todo,
-            done: !props.todo.done
-        }).then(response => response.data);
-    }
+    const {makeAsDoneTodo} = useTodoService();
 
     function makeAsDone() {
         makeAsDoneTodo(props)

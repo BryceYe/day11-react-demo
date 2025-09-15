@@ -59,3 +59,9 @@
     background-color: #1e8bfc;
     width:40px;
 }
+
+.not-found {
+    text-align: center;
+    color: black;
+    margin-top: 5px;
+}

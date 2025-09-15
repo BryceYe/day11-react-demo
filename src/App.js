@@ -4,6 +4,7 @@ import {todoReducer} from "./reducers/TodoReducer";
 import {TodoContext} from "./contexts/TodoContext";
 import {MultipleTodo} from "./components/MultipleTodo";
 import {createBrowserRouter, NavLink, Outlet, RouterProvider} from "react-router";
+import {ErrorPage} from "./pages/ErrorPage";
 
 function DefaultLayout() {
     return <div>
@@ -24,6 +25,7 @@ const routes = createBrowserRouter([
     {
         path:"/",
         element:<DefaultLayout/>,
+        errorElement:<ErrorPage/>,
         children:[
             {
                 path:"/",

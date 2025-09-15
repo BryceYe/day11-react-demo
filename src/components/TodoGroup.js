@@ -3,6 +3,7 @@ import {TodoItem} from "./TodoItem";
 import {TodoContext} from "../contexts/TodoContext";
 import {useNavigate} from "react-router";
 import {useTodoService} from "../useTodoService";
+import {Button} from "antd";
 
 export function TodoGroup() {
     const {state, dispatch} = useContext(TodoContext)
@@ -27,8 +28,8 @@ export function TodoGroup() {
             state.map((item, index) => (
                 <div className="todo-row" key={item.id}>
                     <TodoItem todo={item} index={index}/>
-                    <button type="button" className={"todo-delete-button"} onClick={() => deleteToto(item)}>X</button>
-                    <button type="button" className={"todo-detail-button"} onClick={() => navigate(`/todos/${item.id}`)}>Detail</button>
+                    <Button color="primary" variant="outlined" className={"todo-delete-button"} onClick={() => deleteToto(item)}>X</Button>
+                    <Button color="primary" variant="outlined" className={"todo-detail-button"} onClick={() => navigate(`/todos/${item.id}`)}>Detail</Button>
                 </div>
             ))
         )}

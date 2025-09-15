@@ -1,11 +1,18 @@
 .todo-item {
-    width: 320px;
-    padding: 1px;
+    width: 340px;
+    height: 30px;
+    padding: 0 16px;
     border: 1px solid #604444;
-    margin: 0;
-    text-align: center;
-    font-size: 11px;
-    color: black;
+    border-radius: 8px;
+    margin: 8px 0;
+    box-shadow: 0 2px 8px rgba(96, 68, 68, 0.08);
+    font-size: 14px;
+    color: #222;
+    background: #faf9f6;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .todo-item  .todo-done {
@@ -49,7 +56,7 @@
 }
 
 .todo-add input {
-    width: 250px;
+    width: 350px;
 }
 
 .todo-add .todo-add-button {
@@ -58,10 +65,4 @@
     color: white;
     background-color: #1e8bfc;
     width:40px;
-}
-
-.not-found {
-    text-align: center;
-    color: black;
-    margin-top: 5px;
 }

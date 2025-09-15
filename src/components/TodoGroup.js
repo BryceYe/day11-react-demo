@@ -1,14 +1,17 @@
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {TodoItem} from "./TodoItem";
 import {TodoContext} from "../contexts/TodoContext";
 import {useNavigate} from "react-router";
 import {useTodoService} from "../useTodoService";
-import {Button} from "antd";
+import {Button, Input, Modal} from "antd";
 
 export function TodoGroup() {
+    const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+    const [currentItem, setCurrentItem] = useState(null);
     const {state, dispatch} = useContext(TodoContext)
     const navigate = useNavigate();
     const {deleteTodos} = useTodoService();
+    const {updateTodoText} = useTodoService();
 
     function deleteToto(item) {
         deleteTodos(item.id)
@@ -20,6 +23,28 @@ export function TodoGroup() {
             )
     }
 
+    function openEditModal(item) {
+        setCurrentItem(item);
+        setIsOpenEditModal(true);
+    }
+
+    function handleOk() {
+        setIsOpenEditModal(false);
+        if (currentItem && currentItem.text.trim() !== "") {
+            updateTodoText(currentItem, currentItem.text.trim())
+                dispatch({
+                    type: "UPDATE_TODO_TEXT",
+                    payload: currentItem
+                })
+        }
+        setCurrentItem(null);
+    }
+
+    function handleCancel() {
+        setIsOpenEditModal(false);
+        setCurrentItem(null);
+    }
+
     return <div>
         <div className={"todo-title"}>Todo List</div>
         {state.length === 0 ? (
@@ -29,9 +54,21 @@ export function TodoGroup() {
                 <div className="todo-row" key={item.id}>
                     <TodoItem todo={item} index={index}/>
                     <Button color="primary" variant="outlined" className={"todo-delete-button"} onClick={() => deleteToto(item)}>X</Button>
+                    <Button color="primary" variant="outlined" className={"todo-edit-button"} onClick={() => openEditModal(item)}>Edit</Button>
                     <Button color="primary" variant="outlined" className={"todo-detail-button"} onClick={() => navigate(`/todos/${item.id}`)}>Detail</Button>
                 </div>
             ))
         )}
+        <Modal
+            open={isOpenEditModal}
+            onOk={handleOk}
+            onCancel={handleCancel}
+        >
+            <div>Edit Todo</div>
+            <Input
+                value={currentItem?.text || ''}
+                onChange={(e) => setCurrentItem({ ...currentItem, text: e.target.value })}
+            />
+        </Modal>
     </div>;
 }

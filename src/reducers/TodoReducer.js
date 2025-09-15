@@ -14,6 +14,10 @@ export function todoReducer(state, action) {
                 }
                 return value
             })
+        case "UPDATE_TODO_TEXT":
+            return state.map(value => value.id === id ? action.payload : value);
+        case "EDIT_TODO":
+            return state.map(value => value.id === id ? {...value, text: action.payload.text} : value);
         default:
             return state
     }

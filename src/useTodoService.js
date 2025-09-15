@@ -18,5 +18,10 @@ export function useTodoService() {
     const deleteTodos = (id) => {
         return api.delete(`/todos/${id}`);
     }
-    return {loadTodos, makeAsDoneTodo, createTodo, deleteTodos};
+
+    const updateTodoText = (todo, newText) => {
+        return api.put(`/todos/${todo.id}`, {...todo, text: newText}).then(response => response.data);
+    }
+
+    return {loadTodos, makeAsDoneTodo, createTodo, deleteTodos, updateTodoText};
 }

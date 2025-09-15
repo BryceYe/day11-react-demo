@@ -8,8 +8,12 @@ export function TodoGroup() {
     const {state, dispatch} = useContext(TodoContext)
     const navigate = useNavigate();
 
+    const deleteTodos = (id) => {
+        return api.delete(`/todos/${id}`);
+    }
+
     function deleteToto(item) {
-        api.delete(`/todos/${item.id}`)
+        deleteTodos(item.id)
             .then(
                 dispatch({
                     type: "DELETE_TODO",

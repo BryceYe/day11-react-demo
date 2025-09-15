@@ -6,13 +6,18 @@ import {api} from "../api/MockApi";
 export function TodoItem(props) {
     const {dispatch} = useContext(TodoContext)
 
-    function makeAsDone() {
-        api.put(`/todos/${props.todo.id}`, {
+    const makeAsDoneTodo =  (props) =>  {
+        return api.put(`/todos/${props.todo.id}`, {
             ...props.todo,
             done: !props.todo.done
-        }).then(
+        }).then(response => response.data);
+    }
+
+    function makeAsDone() {
+        makeAsDoneTodo(props)
+            .then(
                 dispatch({
-                    type: "TOGGLE_TODO",
+                    type: "UPDATE_TODO",
                     payload: {id: props.todo.id}
                 })
             )

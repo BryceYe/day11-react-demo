@@ -2,14 +2,18 @@ import {useState, useContext} from "react";
 import {TodoContext} from "../contexts/TodoContext";
 import {api} from "../api/MockApi";
 
+const createTodo = (input) => {
+    return api.post("/todos", {text: input.trim(), done: false})
+    .then(response => response.data); }
+
 export function TodoItemGenerator() {
     const [input, setInput] = useState("");
     const {dispatch} = useContext(TodoContext);
 
     function handleAdd() {
         if (input.trim() === "") return;
-        api.post("/todos", {text: input.trim(), done: false})
-            .then(response => response.data)
+
+        createTodo(input.trim())
             .then(todo => {
                 dispatch({
                     type: "ADD_TODO",

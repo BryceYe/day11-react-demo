@@ -23,10 +23,6 @@ export function DefaultLayout() {
         {
             key: 'todo-done-list',
             label: <NavLink to={"/todo-done-list"}>Done List</NavLink>
-        },
-        {
-            key: 'todos-1',
-            label: <NavLink to={"/todos/1"}>1</NavLink>
         }
     ]
 

@@ -17,16 +17,16 @@ export function DefaultLayout() {
             label: <NavLink to={"/"}>Home</NavLink>
         },
         {
-            key: 'about-us',
-            label: <NavLink to={"/about-us"}>About Us</NavLink>
-        },
-        {
             key: 'todo-done-list',
             label: <NavLink to={"/todo-done-list"}>Done List</NavLink>
+        },
+        {
+            key: 'about-us',
+            label: <NavLink to={"/about-us"}>About Us</NavLink>
         }
     ]
 
-    return <Layout>
+    return <Layout style={{minHeight: "100vh"}}>
         <Header>
             <Menu onClick={onClick}
                   selectedKeys={[current]}

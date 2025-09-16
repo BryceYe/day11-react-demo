@@ -3,8 +3,8 @@ import {TodoItem} from "./TodoItem";
 import {TodoContext} from "../contexts/TodoContext";
 import {useNavigate} from "react-router";
 import {useTodoService} from "../useTodoService";
-import {Button, Input, Modal} from "antd";
-
+import {Button, Input, Modal, Space} from "antd";
+import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 export function TodoGroup() {
     const [isOpenEditModal, setIsOpenEditModal] = useState(false);
     const [currentItem, setCurrentItem] = useState(null);
@@ -53,9 +53,27 @@ export function TodoGroup() {
             state.map((item, index) => (
                 <div className="todo-row" key={item.id}>
                     <TodoItem todo={item} index={index}/>
-                    <Button color="primary" variant="outlined" className={"todo-delete-button"} onClick={() => deleteToto(item)}>X</Button>
-                    <Button color="primary" variant="outlined" className={"todo-edit-button"} onClick={() => openEditModal(item)}>Edit</Button>
-                    <Button color="primary" variant="outlined" className={"todo-detail-button"} onClick={() => navigate(`/todos/${item.id}`)}>Detail</Button>
+                    <Space size="small">
+                        <Button
+                            type="primary"
+                            danger
+                            icon={<DeleteOutlined />}
+                            onClick={() => deleteToto(item)}
+                            size="small"
+                        />
+                        <Button
+                            type="default"
+                            icon={<EditOutlined />}
+                            onClick={() => openEditModal(item)}
+                            size="small"
+                        />
+                        <Button
+                            type="primary"
+                            icon={<EyeOutlined />}
+                            onClick={() => navigate(`/todos/${item.id}`)}
+                            size="small"
+                        />
+                    </Space>
                 </div>
             ))
         )}
